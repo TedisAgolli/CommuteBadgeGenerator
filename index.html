@@ -9,35 +9,57 @@
 <html>
   <body>
     <div class="container">
-      <form class="col-lg-6 offset-lg-3 ">
-        <h3 class="text-center">Google Maps</h3>
-        <label>Origin</label>
-        Lat,Long <input type="text" id="origLatLong" class="form-control" />
-        <br />
-        <label>Destination</label>
-        Lat,Long<input type="text" id="destLatLong" class="form-control" />
-        <br />
-        Maps API Key<input type="text" id="apiKey" class="form-control" />
-        <br />
-        <h3 class="text-center">Shields.io</h3>
+      <div class="row justify-content-center">
+        <h1 class="col-lg-8 offset-lg-2 ">Commute time badge generator</h1>
+      </div>
 
-        Label <input type="text" id="label" class="form-control" />
-        <br />
-        Logo <input type="text" id="logo" class="form-control" />
-        <br />
-        Color <input type="text" id="color" class="form-control" />
-        <br />
-        Style <input type="text" id="style" class="form-control" />
-        <br />
+      <div class="row justify-content-center">
+        <p class="col-lg-10 offset-lg-1" style="font-size:1.5rem">
+          This form helps you generate a badge that displays the commute time
+          between two points. For example: <img src="exampleTile.png" />
+          <br />
+          It uses the
+          <a
+            href="https://developers.google.com/maps/documentation/distance-matrix/intro"
+            >Google Maps API Distance Matrix</a
+          >
+          to get the travel distance and
+          <a href="https://shields.io/">shields.io</a> to generate the badge. I
+          built this for people who want to include a commute tile in their
+          SharpTools dashboard, but the generated badge can be used for
+          anything.
+        </p>
+      </div>
+      <div class="row">
+        <form class="col-lg-6 offset-lg-3 ">
+          <h3 class="text-center">Google Maps</h3>
+          <label>Origin</label>
+          Lat,Long <input type="text" id="origLatLong" class="form-control" />
+          <br />
+          <label>Destination</label>
+          Lat,Long<input type="text" id="destLatLong" class="form-control" />
+          <br />
+          Maps API Key<input type="text" id="apiKey" class="form-control" />
+          <br />
+          <h3 class="text-center">Shields.io</h3>
 
-        <input
-          type="button"
-          value="Generate"
-          class="btn btn-primary"
-          onclick="displayUrl(this.form);return false;"
-        />
-      </form>
+          Label <input type="text" id="label" class="form-control" />
+          <br />
+          Logo <input type="text" id="logo" class="form-control" />
+          <br />
+          Color <input type="text" id="color" class="form-control" />
+          <br />
+          Style <input type="text" id="style" class="form-control" />
+          <br />
 
+          <input
+            type="button"
+            value="Generate"
+            class="btn btn-primary"
+            onclick="displayUrl(this.form);return false;"
+          />
+        </form>
+      </div>
       <div class="row">
         <div class="col-lg-6 offset-lg-3 ">
           <div class="row justify-content-center mb-4">
