@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<html>
+  <body>
+    <label>Origin</label>
+    Lat,Long <input type="text" id="origLatLong" />
+    <br />
+    <label>Destination</label>
+    Lat,Long<input type="text" id="destLatLong" />
+    <br />
+    Maps API Key<input type="text" id="apiKey" />
+    <br />
+    <label>Shields.io</label>
+    <br />
+    Label <input type="text" id="label" />
+    <br />
+    Logo <input type="text" id="logo" />
+    <br />
+    Color <input type="text" id="color" />
+    <br />
+    Style <input type="text" id="style" />
+    <br />
+
+    <input
+      type="button"
+      value="submit"
+      onclick="displayUrl(this.form);return false;"
+    />
+    <br />
+    <img id="badge" />
+  </body>
+
+  <script>
+    function displayUrl(form) {
+      let origLatLong = document.getElementById("origLatLong").value.trim();
+      let destLatLong = document.getElementById("destLatLong").value.trim();
+      let apiKey = document.getElementById("apiKey").value.trim();
+      let googleParams = new URLSearchParams({
+        origins: origLatLong,
+        destinations: destLatLong,
+        key: apiKey,
+        departure_time: "now",
+        mode: "driving",
+        units: "imperial"
+      }).toString();
+      let googleMapsBaseUrl =
+        "https://maps.googleapis.com/maps/api/distancematrix/json?";
+      let googleMapsUrl = googleMapsBaseUrl + googleParams;
+
+      let [label, logo, color, style] = [
+        "label",
+        "logo",
+        "color",
+        "style"
+      ].map(e => document.getElementById(e).value.trim());
+      let shieldsParams = new URLSearchParams({
+        label,
+        logo,
+        color,
+        style,
+        url: googleMapsUrl,
+        query: "$.rows[0].elements[0].duration_in_traffic.text"
+      });
+
+      let shieldsBaseQuery = "https://img.shields.io/badge/dynamic/json?";
+      let shieldsFullQuery = shieldsBaseQuery + shieldsParams;
+      document.getElementById("badge").setAttribute("src", shieldsFullQuery);
+      console.log(shieldsFullQuery);
+    }
+  </script>
+</html>
