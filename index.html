@@ -1,33 +1,60 @@
 <!DOCTYPE html>
 <meta charset="utf-8" />
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+  crossorigin="anonymous"
+/>
 <html>
   <body>
-    <label>Origin</label>
-    Lat,Long <input type="text" id="origLatLong" />
-    <br />
-    <label>Destination</label>
-    Lat,Long<input type="text" id="destLatLong" />
-    <br />
-    Maps API Key<input type="text" id="apiKey" />
-    <br />
-    <label>Shields.io</label>
-    <br />
-    Label <input type="text" id="label" />
-    <br />
-    Logo <input type="text" id="logo" />
-    <br />
-    Color <input type="text" id="color" />
-    <br />
-    Style <input type="text" id="style" />
-    <br />
+    <div class="container">
+      <form class="col-lg-6 offset-lg-3 ">
+        <h3 class="text-center">Google Maps</h3>
+        <label>Origin</label>
+        Lat,Long <input type="text" id="origLatLong" class="form-control" />
+        <br />
+        <label>Destination</label>
+        Lat,Long<input type="text" id="destLatLong" class="form-control" />
+        <br />
+        Maps API Key<input type="text" id="apiKey" class="form-control" />
+        <br />
+        <h3 class="text-center">Shields.io</h3>
 
-    <input
-      type="button"
-      value="submit"
-      onclick="displayUrl(this.form);return false;"
-    />
-    <br />
-    <img id="badge" />
+        Label <input type="text" id="label" class="form-control" />
+        <br />
+        Logo <input type="text" id="logo" class="form-control" />
+        <br />
+        Color <input type="text" id="color" class="form-control" />
+        <br />
+        Style <input type="text" id="style" class="form-control" />
+        <br />
+
+        <input
+          type="button"
+          value="Generate"
+          class="btn btn-primary"
+          onclick="displayUrl(this.form);return false;"
+        />
+      </form>
+
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3 ">
+          <div class="row justify-content-center mb-4">
+            <img id="badge" style="display:none;" />
+          </div>
+          <div class="row mb-4">
+            <textarea
+              class="form-control"
+              type="text"
+              id="generatedUrl"
+              rows="8"
+              style="display:none;"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 
   <script>
@@ -64,7 +91,12 @@
 
       let shieldsBaseQuery = "https://img.shields.io/badge/dynamic/json?";
       let shieldsFullQuery = shieldsBaseQuery + shieldsParams;
-      document.getElementById("badge").setAttribute("src", shieldsFullQuery);
+      let badge = document.getElementById("badge");
+      badge.src = shieldsFullQuery;
+      badge.style.display = "block";
+      let genUrl = document.getElementById("generatedUrl");
+      genUrl.value = shieldsFullQuery;
+      genUrl.style.display = "block";
       console.log(shieldsFullQuery);
     }
   </script>
